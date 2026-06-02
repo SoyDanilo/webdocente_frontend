@@ -1,0 +1,1808 @@
+/* ==================================================================================
+   BLOQUE: RESET & BASE (Restablecer y Estilos Base)
+   ----------------------------------------------------------------------------------
+   Reset: Elimina los márgenes/paddings que los navegadores agregan por defecto.
+   box-sizing: border-box hace que el padding NO sume al ancho total del elemento.
+   Luego definimos estilos base para html, body, enlaces, imágenes y el contenedor.
+   ================================================================================== */
+
+/* Selector universal (*) que afecta a TODOS los elementos y sus pseudoelementos */
+*,
+*::before,   /* ::before = pseudoelemento que se inserta ANTES del contenido */
+*::after {   /* ::after = pseudoelemento que se inserta DESPUÉS del contenido */
+    margin: 0;        /* Elimina márgenes externos por defecto */
+    padding: 0;       /* Elimina rellenos internos por defecto */
+    box-sizing: border-box; /* Incluye padding y border en el ancho/alto total */
+}
+
+html {
+    scroll-behavior: smooth; /* Scroll suave nativo (navegadores modernos) */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Fuentes priorizadas: primero Segoe UI, luego del sistema, sino sans-serif genérica */
+    color: #111827;           /* Color de texto: gris muy oscuro casi negro */
+    background-color: #ffffff; /* Fondo blanco */
+    line-height: 1.6;         /* Altura de línea: 1.6x el tamaño de fuente, buena legibilidad */
+    overflow-x: hidden;        /* Oculta scroll horizontal (evita elementos que se salgan) */
+}
+
+a {
+    text-decoration: none; /* Saca el subrayado de los enlaces */
+    color: inherit;         /* Hereda el color del elemento padre */
+}
+
+img {
+    max-width: 100%;  /* Las imágenes nunca superan el ancho de su contenedor */
+    display: block;   /* Elimina el espacio blanco debajo de las imágenes inline */
+}
+
+.container {
+    max-width: 1200px;       /* Ancho máximo del contenido */
+    margin: 0 auto;          /* Centra horizontalmente (márgenes automáticos) */
+    padding: 0 24px;         /* Padding lateral para que no se pegue a los bordes */
+}
+
+/* ==================================================================================
+   BLOQUE: COLOR VARIABLES (Variables de Color CSS)
+   ----------------------------------------------------------------------------------
+   Las variables CSS (custom properties) se definen en :root (la raíz del documento).
+   Se usan con la función var(--nombre-variable).
+   Ventajas: cambiar un color en un solo lugar lo cambia en toda la página.
+   Paleta: verde oscuro, verde medio, verde claro, menta, menta claro, menta pálido,
+           fondo claro, texto oscuro, texto gris, texto claro, sombras y radios.
+   ================================================================================== */
+
+:root {
+    --green-dark: #0f4c3a;     /* Verde oscuro: fondos, textos importantes */
+    --green-medium: #1a6b4a;   /* Verde medio: gradientes, hover */
+    --green-light: #2d8a5e;    /* Verde claro: gradientes, acentos */
+    --mint: #4ade80;           /* Menta: acentos brillantes, highlights */
+    --mint-light: #86efac;     /* Menta claro: variante más suave */
+    --mint-pale: #bbf7d0;      /* Menta pálido: fondos sutiles, bordes */
+    --bg-light: #f0fdf4;       /* Fondo verde muy claro: secciones alternadas */
+    --bg-card: #ffffff;        /* Fondo blanco para tarjetas */
+    --text-dark: #111827;      /* Texto principal casi negro */
+    --text-gray: #4b5563;      /* Texto secundario gris */
+    --text-light: #9ca3af;     /* Texto terciario gris claro */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);   /* Sombra pequeña y sutil */
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);    /* Sombra mediana para tarjetas */
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);  /* Sombra grande para modales/bloques */
+    --radius-sm: 8px;          /* Radio de borde pequeño */
+    --radius-md: 16px;         /* Radio de borde mediano */
+    --radius-lg: 24px;         /* Radio de borde grande */
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave con ease-out */
+}
+
+/* ==================================================================================
+   BLOQUE: NAVBAR (Barra de Navegación)
+   ----------------------------------------------------------------------------------
+   Barra fija en la parte superior. Por defecto es transparente con fondo de gradiente.
+   Al scrollear (clase .scrolled agregada por JS) se vuelve blanca semitransparente
+   con efecto blur y sombra. Contiene logo, enlaces, botón WhatsApp y menú hamburguesa.
+   ================================================================================== */
+
+.navbar {
+    position: fixed;      /* Se queda fija al scrollear */
+    top: 0;               /* Pegada al borde superior */
+    left: 0;              /* Pegada al borde izquierdo */
+    width: 100%;          /* Ocupa todo el ancho */
+    z-index: 1000;        /* Capa muy alta para estar SIEMPRE arriba de todo */
+    padding: 16px 0;      /* Padding vertical: 16px arriba/abajo */
+    transition: background var(--transition), padding var(--transition);
+    /* Transición suave para el cambio de fondo y padding al scrollear */
+}
+
+.navbar.scrolled {                       /* Cuando el usuario scrolleó más de 50px (JS) */
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+    backdrop-filter: blur(12px);            /* Efecto de desenfoque (cristal) */
+    -webkit-backdrop-filter: blur(12px);    /* Mismo efecto para Safari */
+    padding: 10px 0;                        /* Menos padding vertical cuando "comprimida" */
+    box-shadow: var(--shadow-sm);           /* Sombra sutil debajo */
+}
+
+.navbar .container {
+    display: flex;            /* Flexbox: elementos en fila */
+    align-items: center;      /* Centrados verticalmente */
+    justify-content: space-between; /* Logo a izquierda, menú a derecha */
+}
+
+.navbar .logo {
+    font-size: 1.5rem;        /* Tamaño del nombre de la marca */
+    font-weight: 800;         /* Muy negrita (extra bold) */
+    color: var(--green-dark); /* Color verde oscuro */
+    display: flex;            /* Flex para alinear ícono y texto */
+    align-items: center;
+    gap: 8px;                 /* Espacio entre ícono y texto */
+}
+
+.navbar .logo .logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;              /* Tamaño del cuadro del ícono */
+    height: 40px;
+    background: linear-gradient(135deg, var(--green-dark), var(--mint)); /* Gradiente diagonal */
+    border-radius: 10px;      /* Esquinas redondeadas */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;            /* Enlaces en fila horizontal */
+    list-style: none;         /* Sin los puntitos de la lista (<ul>) */
+    gap: 32px;                /* Espacio entre cada enlace */
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-gray);  /* Color gris por defecto */
+    transition: color var(--transition); /* Transición al cambiar color */
+    position: relative;       /* Necesario para el ::after (subrayado animado) */
+}
+
+.nav-links a::after {            /* Línea decorativa debajo de cada enlace */
+    content: '';                 /* Vacío porque es puramente decorativo */
+    position: absolute;          /* Posicionado respecto al <a> (relative) */
+    bottom: -4px;                /* 4px debajo del texto */
+    left: 0;
+    width: 0;                    /* Ancho 0 = invisible por defecto */
+    height: 2px;                 /* Altura de la línea */
+    background: var(--mint);     /* Color menta */
+    transition: width var(--transition); /* Se anima al hacer hover */
+    border-radius: 2px;
+}
+
+.nav-links a:hover {
+    color: var(--green-dark);    /* Se oscurece al hacer hover */
+}
+
+.nav-links a:hover::after {
+    width: 100%;                 /* La línea se expande a todo el ancho */
+}
+
+.nav-whatsapp {                             /* Botón especial de WhatsApp en la navbar */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;                    /* Color oficial de WhatsApp */
+    color: white !important;                /* Forza color blanco (!important) */
+    padding: 10px 20px;                     /* Padding para que se vea como botón */
+    border-radius: 50px;                    /* Bordes súper redondeados (píldora) */
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--transition) !important; /* Transición en TODAS las propiedades */
+}
+
+.nav-whatsapp:hover {
+    background: #1da851 !important;         /* Verde más oscuro al hover */
+    transform: translateY(-2px);            /* Se eleva 2px */
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); /* Sombra verde */
+}
+
+.nav-whatsapp::after {
+    display: none !important;               /* Oculta la línea decorativa (no aplica aquí) */
+}
+
+/* Menú toggle (hamburguesa) - solo visible en móvil */
+.menu-toggle {
+    display: none;              /* Oculto en desktop */
+    flex-direction: column;     /* Las 3 rayitas en columna */
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;           /* Sin fondo */
+    border: none;               /* Sin borde */
+}
+
+.menu-toggle span {
+    display: block;
+    width: 28px;                /* Ancho de cada rayita */
+    height: 3px;                /* Altura (grosor) de cada rayita */
+    background: var(--green-dark);
+    border-radius: 3px;
+    transition: all var(--transition); /* Transición para animar a X */
+}
+
+/* Cuando el menú está activo, la primera rayita gira 45° -> parte de la X */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+/* La segunda rayita se desvanece */
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+/* La tercera rayita gira -45° -> la otra parte de la X */
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* ==================================================================================
+   BLOQUE: HERO (Sección de Portada Principal)
+   ----------------------------------------------------------------------------------
+   Ocupa el 100% del alto visible (100vh). Tiene gradiente de fondo, círculos
+   decorativos radiales con ::before y ::after, y una cuadrícula de 2 columnas:
+   - .hero-content (izquierda): badge, título, párrafo, botones
+   - .hero-visual (derecha): bloque de código con syntax highlighting
+   ================================================================================== */
+
+.hero {
+    min-height: 100vh;          /* Mínimo: toda la altura de la pantalla */
+    display: flex;              /* Flexbox para centrar contenido */
+    align-items: center;        /* Centrado vertical */
+    background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 50%, var(--bg-light) 100%);
+    /* Gradiente: verde claro en bordes, blanco en el centro */
+    position: relative;         /* Para posicionar los círculos decorativos */
+    overflow: hidden;           /* Oculta lo que se salga (círculos decorativos) */
+    padding-top: 80px;          /* Compensa el espacio de la navbar fija */
+}
+
+.hero::before {                 /* Círculo decorativo grande (arriba derecha) */
+    content: '';
+    position: absolute;
+    top: -50%;                  /* Mitad fuera de la pantalla */
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;       /* No interfiere con clics */
+}
+
+.hero::after {                  /* Círculo decorativo más chico (abajo izquierda) */
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(15, 76, 58, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero .container {
+    display: grid;              /* Grid de 2 columnas */
+    grid-template-columns: 1fr 1fr; /* Ambas columnas igual ancho */
+    gap: 60px;                  /* Espacio entre columnas */
+    align-items: center;
+    position: relative;
+    z-index: 1;                 /* Por encima de los círculos decorativos */
+}
+
+.hero-content {
+    padding: 40px 0;
+}
+
+.hero-badge {                   /* Etiqueta "Disponible para clases online" */
+    display: inline-flex;       /* Se ajusta al contenido */
+    align-items: center;
+    gap: 8px;
+    background: var(--green-dark);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 50px;        /* Forma de píldora */
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;      /* Espacio entre letras */
+}
+
+.hero-badge .dot {              /* Puntito animado verde menta */
+    width: 8px;
+    height: 8px;
+    background: var(--mint);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite; /* Animación infinita de 2s */
+}
+
+@keyframes pulse-dot {          /* Animación: el punto parpadea suavemente */
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.8); }
+}
+
+.hero h1 {
+    font-size: 3.5rem;          /* Título grande (56px aprox) */
+    font-weight: 800;
+    line-height: 1.15;          /* Espacio entre líneas muy ajustado */
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.hero h1 .highlight {           /* Gradiente en "Programación" */
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    -webkit-background-clip: text;       /* Recorta el fondo al texto (Safari) */
+    -webkit-text-fill-color: transparent; /* Texto transparente para ver el gradiente */
+    background-clip: text;               /* Recorta el fondo al texto (estándar) */
+}
+
+.hero h1 .highlight-mint {      /* Gradiente en "Machine Learning" */
+    background: linear-gradient(135deg, var(--green-light), var(--mint));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    color: var(--text-gray);
+    max-width: 520px;           /* No se estira demasiado */
+    margin-bottom: 36px;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;            /* Los botones se envuelven si no entran */
+}
+
+.btn {                          /* Clase base para TODOS los botones */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border-radius: 50px;        /* Bordes bien redondeados */
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;               /* Sin borde */
+    cursor: pointer;            /* Cursor de mano */
+    transition: all var(--transition); /* Transición en hover */
+}
+
+.btn-primary {                  /* Botón principal con gradiente verde oscuro */
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    color: white;
+    box-shadow: 0 4px 15px rgba(15, 76, 58, 0.3); /* Sombra verde */
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px); /* Se eleva */
+    box-shadow: 0 8px 25px rgba(15, 76, 58, 0.4); /* Sombra más grande */
+}
+
+.btn-whatsapp {                 /* Botón WhatsApp */
+    background: #25D366;         /* Color oficial */
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    background: #1da851;
+}
+
+.btn-secondary {                /* Botón secundario (outlined) */
+    background: white;
+    color: var(--green-dark);
+    border: 2px solid var(--mint-pale);
+}
+
+.btn-secondary:hover {
+    border-color: var(--mint);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.hero-visual {                  /* Contenedor del bloque de código */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-code-block {              /* Simula una ventana de editor de código */
+    background: #1e1e2e;        /* Fondo oscuro tipo VS Code */
+    border-radius: var(--radius-md);
+    padding: 8px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    transform: perspective(800px) rotateY(-5deg); /* Leve rotación 3D */
+    transition: transform var(--transition);
+}
+
+.hero-code-block:hover {
+    transform: perspective(800px) rotateY(0deg); /* Se endereza al hover */
+}
+
+.code-header {                  /* Barra superior de la "ventana" del editor */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #181825;        /* Fondo un poco más oscuro que el código */
+    border-radius: 12px 12px 0 0; /* Solo esquinas superiores redondeadas */
+}
+
+.code-dot {                     /* Los tres puntitos (cerrar, minimizar, maximizar) */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.code-dot.red { background: #f87171; }      /* Rojo: cerrar */
+.code-dot.yellow { background: #fbbf24; }   /* Amarillo: minimizar */
+.code-dot.green { background: #34d399; }    /* Verde: maximizar */
+
+.code-header span {             /* Nombre del archivo (modelo.py) */
+    color: #6b7280;
+    font-size: 0.8rem;
+    margin-left: 8px;
+    font-family: 'Courier New', monospace;
+}
+
+.code-body {                    /* Contenido del código con colores de sintaxis */
+    padding: 20px;
+    background: #1e1e2e;
+    border-radius: 0 0 12px 12px;
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #cdd6f4;             /* Texto claro sobre fondo oscuro */
+    overflow-x: auto;           /* Scroll horizontal si el código es muy largo */
+}
+
+/* Clases para el resaltado de sintaxis (syntax highlighting) */
+.code-body .keyword { color: #cba6f7; }          /* Palabras clave (violeta) */
+.code-body .function { color: #89b4fa; }         /* Funciones (azul) */
+.code-body .string { color: #a6e3a1; }           /* Strings (verde) */
+.code-body .comment { color: #6c7086; font-style: italic; } /* Comentarios (gris, itálica) */
+.code-body .number { color: #fab387; }           /* Números (naranja) */
+.code-body .class-name { color: #f9e2af; }       /* Nombres de clase (amarillo) */
+
+/* Iconos flotantes decorativos (🐍🤖📊) */
+.floating-icon {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 6s ease-in-out infinite; /* Flotan infinitamente */
+    opacity: 0.2;           /* Muy sutiles */
+}
+
+.floating-icon:nth-child(2) { top: 10%; right: -10%; animation-delay: 0s; }
+.floating-icon:nth-child(3) { bottom: 20%; left: -15%; animation-delay: 2s; }
+.floating-icon:nth-child(4) { top: 40%; right: -15%; animation-delay: 4s; }
+
+@keyframes float {              /* Animación de flotación */
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* ==================================================================================
+   BLOQUE: SECTION GENERAL (Estilos Comunes para Todas las Secciones)
+   ----------------------------------------------------------------------------------
+   .section: padding vertical de 100px, usado por todas las secciones.
+   .section-header: encabezado centrado con tag (etiqueta), h2 y párrafo.
+   .section-tag: pequeña etiqueta tipo píldora con el nombre de la sección.
+   ================================================================================== */
+
+.section {
+    padding: 100px 0;           /* Espacio vertical arriba y abajo */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 64px;        /* Separación con el contenido de abajo */
+}
+
+.section-tag {
+    display: inline-block;      /* Se ajusta al contenido */
+    background: var(--bg-light);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 16px;
+    border-radius: 50px;        /* Forma de píldora */
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;  /* Mayúsculas */
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    max-width: 600px;
+    margin: 0 auto;             /* Centrado */
+}
+
+/* ==================================================================================
+   BLOQUE: ABOUT SECTION (Sección "Sobre Mí")
+   ----------------------------------------------------------------------------------
+   Fondo verde claro. Cuadrícula de 2 columnas: imagen (placeholder) + texto.
+   Las tarjetas de estadísticas (stat-card) tienen hover con elevación.
+   ================================================================================== */
+
+.about {
+    background: var(--bg-light); /* Fondo verde claro para diferenciar */
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+    gap: 60px;
+    align-items: center;
+}
+
+.about-image {
+    display: flex;
+    justify-content: center;
+}
+
+.about-image-placeholder {      /* Placeholder para la foto del docente */
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;             /* Relación 1:1 = cuadrado perfecto */
+    background: linear-gradient(135deg, var(--mint-pale), var(--bg-light));
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;      /* Contenido en columna centrada */
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    border: 3px dashed var(--mint); /* Borde punteado menta */
+    color: var(--green-dark);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 40px;
+}
+
+.about-image-placeholder .icon {
+    font-size: 4rem;             /* Emoji grande */
+}
+
+.about-text h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.about-text p {
+    color: var(--text-gray);
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.about-stats {                   /* Cuadrícula de 3 tarjetas de estadísticas */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.stat-card {                     /* Tarjeta blanca con sombra */
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);  /* Se eleva al hover */
+    box-shadow: var(--shadow-md);
+}
+
+.stat-number {                   /* Número grande de la estadística */
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--green-dark);
+    display: block;              /* Ocupa su propia línea */
+}
+
+.stat-label {                    /* Texto debajo del número */
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-top: 4px;
+}
+
+/* ==================================================================================
+   BLOQUE: SERVICES (Sección de Servicios)
+   ----------------------------------------------------------------------------------
+   Cuadrícula de 3 columnas con tarjetas de servicio. Cada tarjeta tiene:
+   - Barra gradiente superior que se anima al hover (::before)
+   - Ícono en círculo que cambia a gradiente oscuro al hover
+   - Se eleva 6px al hacer hover
+   - Borde sutil que cambia a menta pálido
+   ================================================================================== */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 28px;
+}
+
+.service-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e5e7eb;    /* Borde gris claro */
+    transition: all var(--transition);
+    position: relative;            /* Para el ::before (barra superior) */
+    overflow: hidden;              /* Oculta la barra cuando está contraída */
+}
+
+.service-card::before {            /* Barra gradiente decorativa superior */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-dark), var(--mint));
+    transform: scaleX(0);          /* Escala 0 = invisible */
+    transform-origin: left;        /* Se expande desde la izquierda */
+    transition: transform var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-6px);    /* Se eleva */
+    box-shadow: var(--shadow-lg);   /* Sombra más grande */
+    border-color: var(--mint-pale);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);           /* Barra se expande a todo el ancho */
+}
+
+.service-icon {                    /* Círculo con el emoji del servicio */
+    width: 56px;
+    height: 56px;
+    background: var(--bg-light);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    transition: background var(--transition);
+}
+
+.service-card:hover .service-icon {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    color: white;                   /* Emoji se vuelve blanco */
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+}
+
+.service-card p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ==================================================================================
+   BLOQUE: METHODOLOGY (Sección de Metodología)
+   ----------------------------------------------------------------------------------
+   Fondo verde oscuro con texto blanco. Contraste alto para destacar.
+   Círculo decorativo radial con ::before.
+   Tarjetas con efecto glassmorphism (fondo translúcido + blur).
+   Cuadrícula de 4 columnas con los pasos numerados.
+   ================================================================================== */
+
+.methodology {
+    background: var(--green-dark);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.methodology::before {             /* Círculo decorativo verde menta tenue */
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.methodology .section-tag {
+    background: rgba(255, 255, 255, 0.15); /* Translúcido blanco */
+    color: var(--mint);
+}
+
+.methodology .section-header h2 {
+    color: white;
+}
+
+.methodology .section-header p {
+    color: rgba(255, 255, 255, 0.7); /* Blanco semitransparente */
+}
+
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas para los 4 pasos */
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.method-card {                      /* Tarjeta con efecto vidrio (glassmorphism) */
+    background: rgba(255, 255, 255, 0.08);   /* Muy translúcido */
+    backdrop-filter: blur(8px);               /* Desenfoque de fondo */
+    border: 1px solid rgba(255, 255, 255, 0.12); /* Borde sutil blanco */
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all var(--transition);
+}
+
+.method-card:hover {
+    background: rgba(255, 255, 255, 0.14);   /* Más opaco al hover */
+    transform: translateY(-4px);
+}
+
+.method-number {                    /* Círculo con el número del paso */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--mint);
+    color: var(--green-dark);
+    font-weight: 800;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    margin-bottom: 16px;
+}
+
+.method-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.method-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);  /* Blanco semitransparente */
+    line-height: 1.6;
+}
+
+/* ==================================================================================
+   BLOQUE: TESTIMONIALS (Sección de Testimonios)
+   ----------------------------------------------------------------------------------
+   Fondo verde claro. Cuadrícula de 2 columnas con tarjetas de reseñas.
+   Cada tarjeta: estrellas doradas + cita en itálica + autor con avatar circular.
+   ================================================================================== */
+
+.testimonials {
+    background: var(--bg-light);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 28px;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 32px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e5e7eb;
+    transition: all var(--transition);
+}
+
+.testimonial-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.testimonial-stars {
+    color: #f59e0b;             /* Color dorado/ámbar */
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.testimonial-card blockquote {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.7;
+    font-style: italic;          /* Texto en itálica (cita) */
+    margin-bottom: 16px;
+}
+
+.testimonial-author {           /* Info del alumno: avatar + nombre */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.testimonial-avatar {           /* Círculo con iniciales del alumno */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mint-pale), var(--mint));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--green-dark);
+    font-size: 1.1rem;
+}
+
+.testimonial-author strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.testimonial-author span {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* ==================================================================================
+   BLOQUE: CONTACT / CTA (Sección de Contacto)
+   ----------------------------------------------------------------------------------
+   Cuadrícula de 2 columnas: info a la izquierda, formulario a la derecha.
+   El formulario tiene fondo verde claro, sombra y campos con estilos modernos.
+   Los campos tienen borde que cambia a menta al enfocarse (focus).
+   ================================================================================== */
+
+.contact {
+    background: white;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.contact-info h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.contact-info > p {             /* > p = solo el párrafo hijo directo */
+    color: var(--text-gray);
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.contact-item {                 /* Fila: ícono + texto del medio de contacto */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.contact-item-icon {            /* Círculo con el ícono (WhatsApp, email, video) */
+    width: 44px;
+    height: 44px;
+    background: var(--bg-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--green-dark);
+    flex-shrink: 0;             /* Evita que se encoja */
+}
+
+.contact-item-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.contact-item-text span {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.contact-cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.contact-form {                  /* El formulario en sí */
+    background: var(--bg-light);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;              /* Cada label en su propia línea */
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;                 /* Ocupa todo el ancho disponible */
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;  /* Borde gris claro */
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;       /* Hereda la fuente del body */
+    transition: border-color var(--transition);
+    background: white;
+    outline: none;              /* Saca el borde azul por defecto del focus */
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--mint);  /* Borde menta al enfocar */
+    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.1); /* Sombra exterior menta sutil */
+}
+
+.form-group textarea {
+    min-height: 120px;           /* Altura mínima para el área de texto */
+    resize: vertical;            /* Solo se puede redimensionar verticalmente */
+}
+
+.btn-submit {                    /* Botón de envío del formulario */
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(15, 76, 58, 0.3);
+}
+
+/* ==================================================================================
+   BLOQUE: WHATSAPP FLOATING BUTTON (Botón Flotante de WhatsApp)
+   ----------------------------------------------------------------------------------
+   Elemento fixed en la esquina inferior derecha. Siempre visible.
+   Tiene: tooltip que aparece al hover + botón circular verde con pulso + badge rojo.
+   ================================================================================== */
+
+.whatsapp-float {
+    position: fixed;            /* Se queda fijo al scrollear */
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;               /* Casi tan alto como la navbar */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.whatsapp-tooltip {             /* Burbuja blanca "¡Escribime ahora!" */
+    background: white;
+    color: var(--text-dark);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+    opacity: 0;                 /* Invisible por defecto */
+    transform: translateX(20px); /* Desplazada a la derecha */
+    transition: all var(--transition);
+    pointer-events: none;       /* No interfiere con clics */
+    white-space: nowrap;        /* No se parte en varias líneas */
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;                 /* Se vuelve visible */
+    transform: translateX(0);   /* Se desliza a su posición */
+}
+
+.whatsapp-btn {                 /* Botón circular verde */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    color: white;
+    border: none;
+    font-size: 1.8rem;          /* Ícono grande de WhatsApp */
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); /* Sombra verde */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    position: relative;          /* Para el badge (notificación) */
+    animation: whatsapp-pulse 2s infinite; /* Pulso infinito */
+}
+
+@keyframes whatsapp-pulse {     /* Animación de pulso en la sombra */
+    0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.6); }
+    100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);      /* Se agranda un poco */
+    background: #1da851;
+    animation: none;            /* Detiene el pulso */
+}
+
+.whatsapp-btn .badge {          /* Notificación roja con "1" */
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    background: #ef4444;        /* Rojo */
+    color: white;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;    /* Borde blanco para que resalte */
+    animation: badge-pulse 1.5s infinite;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* ==================================================================================
+   BLOQUE: FOOTER (Pie de Página)
+   ----------------------------------------------------------------------------------
+   Fondo verde oscuro con texto blanco. Cuadrícula de 4 columnas:
+   - Marca (2fr de ancho) + 3 columnas de enlaces (1fr cada una).
+   - Barra inferior con copyright y redes sociales.
+   - Enlaces cambian a color menta al hover.
+   ================================================================================== */
+
+.footer {
+    background: var(--green-dark);
+    color: white;
+    padding: 48px 0 24px;       /* 48px arriba, 24px abajo */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* Marca más ancha (2fr) */
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-brand p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7); /* Blanco semitransparente */
+    line-height: 1.7;
+    max-width: 300px;
+}
+
+.footer-col h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--mint);         /* Títulos en menta */
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;     /* Enlaces en vertical */
+    gap: 10px;
+}
+
+.footer-col ul a {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color var(--transition);
+}
+
+.footer-col ul a:hover {
+    color: var(--mint);          /* Se iluminan en menta */
+}
+
+.footer-bottom {                 /* Barra inferior con copyright + redes */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Línea separadora sutil */
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-socials {                /* Íconos de redes sociales */
+    display: flex;
+    gap: 12px;
+}
+
+.footer-socials a {              /* Cada círculo de red social */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    transition: all var(--transition);
+}
+
+.footer-socials a:hover {
+    background: var(--mint);     /* Fondo menta */
+    color: var(--green-dark);    /* Ícono verde oscuro */
+    transform: translateY(-3px); /* Se eleva */
+}
+
+/* ==================================================================================
+   BLOQUE: ANIMATIONS (Animaciones de Aparición)
+   ----------------------------------------------------------------------------------
+   Tres variantes de fade-in que se activan con la clase .visible (agregada por JS).
+   - fade-in: aparece desde abajo (translateY 30px)
+   - fade-in-left: aparece desde la izquierda (translateX -40px)
+   - fade-in-right: aparece desde la derecha (translateX 40px)
+   ================================================================================== */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);      /* Desplazado hacia abajo */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);         /* Posición original */
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-40px);     /* Desplazado a la izquierda */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(40px);      /* Desplazado a la derecha */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ==================================================================================
+   BLOQUE: RESPONSIVE (Diseño Adaptable / Media Queries)
+   ----------------------------------------------------------------------------------
+   Tres puntos de quiebre (breakpoints):
+   - 1024px: tablet horizontal / desktop chico
+   - 768px: tablet vertical / móvil grande
+   - 480px: móvil chico
+   Ajusta: layouts de grid, tamaños de fuente, navegación, márgenes, etc.
+   ================================================================================== */
+
+@media (max-width: 1024px) {
+    /* Tablets en horizontal o pantallas de notebook chicas (< 1024px) */
+
+    .hero h1 {
+        font-size: 2.8rem;    /* Título más chico */
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr); /* Servicios: 2 columnas */
+    }
+
+    .methodology-grid {
+        grid-template-columns: repeat(2, 1fr); /* Metodología: 2 columnas */
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr); /* Footer: 2 columnas */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Tablets en vertical o móviles grandes (< 768px) */
+
+    .menu-toggle {
+        display: flex;        /* Aparece el menú hamburguesa */
+    }
+
+    .nav-links {              /* Menú de escritorio se oculta y pasa a ser panel lateral */
+        position: fixed;
+        top: 0;
+        right: -100%;         /* Fuera de la pantalla a la derecha */
+        width: 280px;
+        height: 100vh;        /* Alto completo de la pantalla */
+        background: white;
+        flex-direction: column;  /* Enlaces en vertical */
+        padding: 80px 32px 32px;
+        gap: 24px;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease; /* Animación de deslizamiento */
+        align-items: flex-start;
+    }
+
+    .nav-links.active {
+        right: 0;             /* Se desliza hacia la derecha (visible) */
+    }
+
+    .nav-overlay {            /* Fondo oscuro detrás del menú móvil */
+        position: fixed;
+        inset: 0;             /* Cubre toda la pantalla (top:0, right:0, bottom:0, left:0) */
+        background: rgba(0, 0, 0, 0.4);
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.active {
+        opacity: 1;
+        pointer-events: all;  /* Activa clics para cerrar el menú */
+    }
+
+    .hero .container {
+        grid-template-columns: 1fr; /* Hero: una sola columna */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        margin: 0 auto 36px;  /* Centrado automático */
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-code-block {
+        transform: none;      /* Sin rotación 3D en móvil */
+        max-width: 100%;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr; /* About: una columna */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr); /* Stats: 3 columnas siguen */
+    }
+
+    .section {
+        padding: 64px 0;     /* Menos padding vertical en móvil */
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr; /* Servicios: 1 columna */
+    }
+
+    .methodology-grid {
+        grid-template-columns: repeat(2, 1fr); /* Metodología: 2 columnas */
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr; /* Testimonios: 1 columna */
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr; /* Contacto: 1 columna */
+        gap: 40px;
+    }
+
+    .contact-form {
+        padding: 28px;        /* Menos padding en el formulario */
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr; /* Footer: 1 columna */
+        text-align: center;
+    }
+
+    .footer-brand p {
+        max-width: 100%;      /* Texto centrado sin límite de ancho */
+    }
+
+    .footer-bottom {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Móviles chicos (< 480px) */
+
+    .hero h1 {
+        font-size: 1.8rem;    /* Título aún más chico */
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr; /* Stats: 1 columna */
+    }
+
+    .methodology-grid {
+        grid-template-columns: 1fr; /* Metodología: 1 columna */
+    }
+
+    .hero-buttons {
+        flex-direction: column;    /* Botones en vertical */
+        align-items: stretch;      /* Ocupan todo el ancho */
+    }
+
+    .hero-buttons .btn {
+        justify-content: center;
+    }
+
+    .contact-cta-buttons {
+        flex-direction: column;
+    }
+
+    .whatsapp-btn {
+        width: 52px;               /* Botón más chico */
+        height: 52px;
+        font-size: 1.5rem;
+    }
+
+    .whatsapp-tooltip {
+        display: none;             /* Sin tooltip en pantallas muy chicas */
+    }
+}
+
+/* ==================================================================================
+   BLOQUE: CHAT WIDGET (Widget de Chat con IA)
+   ----------------------------------------------------------------------------------
+   Widget flotante de chat con asistente IA. Diseñado para la paleta verde oscuro + menta.
+
+   Componentes:
+   - .chat-toggle-btn: Botón flotante circular que abre/cierra el panel
+   - .chat-panel: Panel de chat que se despliega hacia arriba
+     - .chat-header: Barra superior con avatar, nombre y botón cerrar
+     - .chat-messages: Área de scroll con los mensajes
+       - .chat-msg: Mensaje individual (usuario o bot)
+       - .chat-typing: Indicador animado de escritura (3 puntitos)
+     - .chat-input-area: Área inferior con textarea y botón enviar
+   ================================================================================== */
+
+/* ---- CONTENEDOR PRINCIPAL ---- */
+.chat-widget {
+    position: fixed;           /* Fijo en la pantalla */
+    bottom: 100px;             /* Sobre el botón de WhatsApp */
+    right: 24px;               /* Misma alineación que WhatsApp */
+    z-index: 999;              /* Mismo nivel que WhatsApp (999) */
+    display: flex;
+    flex-direction: column;    /* Botón arriba, panel abajo */
+    align-items: flex-end;     /* Alineado a la derecha */
+}
+
+/* ---- BOTÓN FLOTANTE DE CHAT ---- */
+.chat-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    color: white;
+    border: none;
+    font-size: 1.6rem;         /* Tamaño del ícono */
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(15, 76, 58, 0.4); /* Sombra verde */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    position: relative;
+}
+
+.chat-toggle-btn:hover {
+    transform: scale(1.1);     /* Se agranda al hover */
+    box-shadow: 0 6px 25px rgba(15, 76, 58, 0.5);
+}
+
+.chat-toggle-btn.active {
+    background: linear-gradient(135deg, #dc2626, #ef4444); /* Rojo cuando está activo (para cerrar) */
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+}
+
+.chat-toggle-btn.active:hover {
+    box-shadow: 0 6px 25px rgba(220, 38, 38, 0.5);
+}
+
+/* ---- PANEL DE CHAT ---- */
+.chat-panel {
+    position: absolute;
+    bottom: 76px;              /* Arriba del botón flotante */
+    right: 0;
+    width: 360px;
+    height: 520px;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;    /* Header - Messages - Input en vertical */
+    opacity: 0;                /* Invisible por defecto */
+    transform: translateY(20px) scale(0.95); /* Desplazado y encogido */
+    pointer-events: none;      /* No interactuable cuando oculto */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom right; /* La animación parte desde la esquina inferior derecha */
+    overflow: hidden;          /* Esquinas redondeadas no se rompen */
+}
+
+.chat-panel.active {
+    opacity: 1;                /* Visible */
+    transform: translateY(0) scale(1); /* Posición y tamaño normal */
+    pointer-events: all;       /* Interactuable */
+}
+
+/* ---- HEADER: Barra superior del panel ---- */
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Info a izquierda, botón a derecha */
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    color: white;
+    border-radius: var(--radius-md) var(--radius-md) 0 0; /* Solo esquinas superiores */
+    flex-shrink: 0;            /* No se encoge */
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2); /* Translúcido blanco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.chat-header-info strong {
+    font-size: 0.95rem;
+    display: block;
+}
+
+.chat-status {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.chat-status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--mint);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite; /* Misma animación que el badge del Hero */
+}
+
+.chat-close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    transition: color var(--transition);
+}
+
+.chat-close-btn:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* ---- MESSAGES: Área de mensajes con scroll ---- */
+.chat-messages {
+    flex: 1;                   /* Ocupa el espacio disponible */
+    overflow-y: auto;          /* Scroll vertical cuando hay muchos mensajes */
+    padding: 16px;
+    background: #f9fafb;       /* Fondo gris muy claro */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;                 /* Espacio entre mensajes */
+}
+
+/* Estilo del scrollbar en el área de mensajes (sutil) */
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #d1d5db;       /* Gris claro */
+    border-radius: 4px;
+}
+
+/* ---- MENSAJE INDIVIDUAL ---- */
+.chat-msg {
+    display: flex;
+    gap: 8px;
+    max-width: 85%;            /* No ocupa todo el ancho */
+    animation: msg-fade-in 0.3s ease-out; /* Animación de aparición */
+}
+
+@keyframes msg-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensaje del bot: alineado a la izquierda con avatar */
+.chat-msg-bot {
+    align-self: flex-start;    /* A la izquierda */
+}
+
+/* Mensaje del usuario: alineado a la derecha sin avatar */
+.chat-msg-user {
+    align-self: flex-end;      /* A la derecha */
+    flex-direction: row-reverse; /* Avatar (no visible) a la derecha */
+}
+
+.chat-msg-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mint-pale), var(--mint));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--green-dark);
+    flex-shrink: 0;            /* No se encoge */
+    margin-top: 4px;           /* Alineación vertical */
+}
+
+/* Burbuja del mensaje */
+.chat-msg-content {
+    background: white;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    word-wrap: break-word;     /* Corta palabras largas */
+    white-space: pre-wrap;     /* Respeta saltos de línea */
+}
+
+/* Burbuja del usuario: verde oscuro, alineada a la derecha */
+.chat-msg-user .chat-msg-content {
+    background: var(--green-dark);
+    color: white;
+    border: none;
+    border-bottom-right-radius: 4px; /* Estilo de burbuja de chat */
+}
+
+/* Burbuja del bot: blanco, bordes redondeados normales */
+.chat-msg-bot .chat-msg-content {
+    border-bottom-left-radius: 4px;
+}
+
+/* Mensaje de error: rojo claro */
+.chat-msg-error .chat-msg-content {
+    background: #fef2f2;       /* Rojo muy claro */
+    border-color: #fecaca;     /* Borde rojo claro */
+    color: #dc2626;            /* Texto rojo */
+    font-size: 0.82rem;
+}
+
+/* ---- INDICADOR DE ESCRITURA (3 puntitos animados) ---- */
+.chat-typing {
+    align-self: flex-start;
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.chat-typing span {
+    width: 8px;
+    height: 8px;
+    background: var(--mint);
+    border-radius: 50%;
+    animation: typing-bounce 1.4s ease-in-out infinite;
+}
+
+.chat-typing span:nth-child(1) { animation-delay: 0s; }
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* ---- INPUT: Área inferior de escritura ---- */
+.chat-input-area {
+    display: flex;
+    align-items: flex-end;     /* Alineado al fondo del textarea */
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 0 0 var(--radius-md) var(--radius-md); /* Solo esquinas inferiores */
+    flex-shrink: 0;            /* No se encoge */
+}
+
+.chat-input {
+    flex: 1;                   /* Ocupa el espacio disponible */
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;       /* Forma de píldora */
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    resize: none;              /* No se redimensiona manualmente */
+    max-height: 120px;         /* Altura máxima antes de scroll */
+    line-height: 1.4;
+    transition: border-color var(--transition);
+}
+
+.chat-input:focus {
+    border-color: var(--mint);  /* Borde menta al enfocar */
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+}
+
+.chat-input::placeholder {
+    color: var(--text-light);
+}
+
+.chat-send-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    flex-shrink: 0;            /* No se encoge */
+}
+
+.chat-send-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(15, 76, 58, 0.3);
+}
+
+.chat-send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ---- CHAT RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .chat-widget {
+        bottom: 90px;           /* Un poco más arriba en móvil */
+        right: 16px;
+    }
+
+    .chat-panel {
+        position: fixed;        /* Cambia a fixed en móvil para ocupar más espacio */
+        bottom: 0;
+        right: 0;
+        width: 100%;            /* Ocupa todo el ancho */
+        height: 70vh;           /* 70% de la altura de la pantalla */
+        border-radius: var(--radius-md) var(--radius-md) 0 0; /* Solo esquinas superiores redondeadas */
+        transform: translateY(100%); /* Oculta abajo de la pantalla */
+        transform-origin: bottom;
+    }
+
+    .chat-panel.active {
+        transform: translateY(0);
+    }
+
+    .chat-header {
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .chat-toggle-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-panel {
+        height: 80vh;           /* Ocupa aún más espacio vertical en móvil chico */
+    }
+
+    .chat-messages {
+        padding: 12px;
+    }
+
+    .chat-input-area {
+        padding: 10px 12px;
+    }
+}

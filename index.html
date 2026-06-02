@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!-- ====================================================================================
+  DOCTYPE html: Declaración del tipo de documento. Le indica al navegador
+  que estamos usando HTML5, la versión más moderna de HTML.
+==================================================================================== -->
+
+<html lang="es">
+<!-- <html lang="es">: Etiqueta raíz del documento. El atributo lang="es" le dice
+     a los navegadores y motores de búsqueda que el contenido está en español. -->
+
+<head>
+    <!-- ===== ETIQUETA <head> =====
+         La cabecera del documento. Aquí van los metadatos, el título, los enlaces
+         a archivos externos (CSS, fuentes, íconos) que NO se ven en la página
+         pero son esenciales para su funcionamiento. -->
+
+    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">: Define la codificación de caracteres. UTF-8 permite
+         usar tildes, eñes, emojis y cualquier carácter especial sin problemas. -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport">: Hace que la página sea responsive. "width=device-width"
+         iguala el ancho al del dispositivo, y "initial-scale=1.0" define el zoom inicial. -->
+
+    <title>Clases de Programación & Machine Learning</title>
+    <!-- <title>: El texto que aparece en la pestaña del navegador. También es importante
+         para el SEO (posicionamiento en buscadores). -->
+
+    <meta name="description" content="Clases particulares de programación y machine learning. Online, todos los niveles. Python, ML, y más.">
+    <!-- <meta name="description">: La descripción que aparece debajo del título en los
+         resultados de búsqueda de Google. Ayuda a que la gente haga clic en tu página. -->
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet">: Vincula el archivo CSS externo (styles.css) al HTML.
+         Así podemos tener todos los estilos separados del contenido. -->
+
+    <!-- Font Awesome for icons -->
+    <!-- Font Awesome es una biblioteca de íconos (como el de WhatsApp, estrella, etc.).
+         La CDN (Content Delivery Network) nos permite usarla sin descargar nada. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <!-- ===== ETIQUETA <body> =====
+         El cuerpo del documento. TODO lo que se ve en la página web va dentro de <body>.
+         Desde textos e imágenes hasta botones y formularios. -->
+
+    <!-- ==================================================================================
+         SECCIÓN: NAVBAR (Barra de Navegación)
+         ----------------------------------------------------------------------------------
+         La navbar es el menú principal que aparece siempre en la parte de arriba.
+         Usa "position: fixed" en CSS para quedarse fija mientras el usuario scrollea.
+         Contiene: logo + enlaces de navegación + botón de WhatsApp + menú hamburguesa.
+    ================================================================================== -->
+    <nav class="navbar" id="navbar">
+    <!-- <nav>: Etiqueta semántica para navegación. "class='navbar'" es para darle
+         estilo con CSS. "id='navbar'" permite seleccionarla con JavaScript. -->
+
+        <div class="container">
+        <!-- .container: Clase común que limita el ancho máximo (1200px) y centra
+             el contenido horizontalmente con márgenes automáticos. -->
+
+            <a href="#" class="logo">
+            <!-- <a href="#">: Enlace que apunta a "#" (arriba de todo, el inicio).
+                 .logo le da estilo de marca/logo de la página. -->
+                <span class="logo-icon">&lt;/&gt;</span>
+                <!-- .logo-icon: El ícono del logo, en este caso el clásico "</>" de código. -->
+                Code<span style="color: var(--mint);">Mentor</span>
+                <!-- El nombre de la marca. "Code" en color normal y "Mentor" en color menta
+                     usando la variable CSS "--mint". -->
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+            <!-- <ul>: Lista no ordenada con los enlaces de navegación.
+                 #navLinks se usa en JavaScript para abrir/cerrar el menú en celulares. -->
+
+                <li><a href="#inicio">Inicio</a></li>
+                <!-- <li>: Cada ítem de la lista. <a href="#inicio">: Enlace que apunta
+                     a la sección con id="inicio" (el Hero). Scrollea suavemente gracias a JS. -->
+
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <!-- Apunta a la sección con id="sobre-mi" (About/Sobre mí). -->
+
+                <li><a href="#servicios">Servicios</a></li>
+                <!-- Apunta a la sección con id="servicios" (Services). -->
+
+                <li><a href="#metodologia">Metodología</a></li>
+                <!-- Apunta a la sección con id="metodologia" (Methodology). -->
+
+                <li><a href="#contacto">Contacto</a></li>
+                <!-- Apunta a la sección con id="contacto" (Contact/Formulario). -->
+
+                <li>
+                <!-- Ítem especial que contiene el botón de WhatsApp en la navbar. -->
+                    <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares"
+                       target="_blank"
+                       class="nav-whatsapp">
+                    <!-- href: Enlace directo a WhatsApp con el número y mensaje predefinido.
+                         target="_blank": Abre en una nueva pestaña.
+                         .nav-whatsapp: Clase con estilo de botón verde de WhatsApp. -->
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                        <!-- <i class="fab fa-whatsapp">: Ícono de WhatsApp de Font Awesome.
+                             "fab" = Font Awesome Brands (marcas). -->
+                    </a>
+                </li>
+            </ul>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+            <!-- <button>: Botón del menú hamburguesa (solo visible en móvil).
+                 aria-label="Abrir menú": Descripción para lectores de pantalla (accesibilidad). -->
+                <span></span>
+                <span></span>
+                <span></span>
+                <!-- Cada <span> es una línea del ícono hamburguesa (tres rayitas).
+                     Con CSS se transforman en una "X" cuando el menú está activo. -->
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================================================================================
+         SECCIÓN: HERO (Portada Principal)
+         ----------------------------------------------------------------------------------
+         Es la sección más importante, lo primero que ve el usuario al entrar.
+         Ocupa el 100% del alto de la pantalla (min-height: 100vh en CSS).
+         Tiene dos columnas: texto a la izquierda y bloque de código a la derecha.
+    ================================================================================== -->
+    <section class="hero" id="inicio">
+    <!-- <section>: Etiqueta semántica para secciones. .hero le da el estilo de portada.
+         id="inicio" es el destino del enlace "Inicio" en la navbar. -->
+
+        <div class="container">
+        <!-- .container: Mismo contenedor limitador que en la navbar (1200px max). -->
+
+            <div class="hero-content fade-in">
+            <!-- .hero-content: Columna izquierda del Hero con el texto principal.
+                 .fade-in: Clase de animación. El elemento aparece desvaneciéndose
+                 y subiendo cuando entra en pantalla (gracias al IntersectionObserver en JS). -->
+
+                <div class="hero-badge">
+                <!-- .hero-badge: Pequeña etiqueta/badge encima del título que indica
+                     disponibilidad. Fondo verde oscuro, texto blanco, forma de píldora. -->
+                    <span class="dot"></span>
+                    <!-- .dot: Puntito verde menta animado (parpadeo suave) que llama la atención. -->
+                    Disponible para clases online
+                </div>
+
+                <h1>
+                <!-- <h1>: El título principal de la página. El más importante para SEO.
+                     Solo debe haber UN <h1> por página. -->
+                    Aprendé <span class="highlight">Programación</span> &<br>
+                    <!-- .highlight: Resalta "Programación" con un gradiente de verde oscuro a claro.
+                         <br>: Salto de línea. -->
+                    <span class="highlight-mint">Machine Learning</span>
+                    <!-- .highlight-mint: Resalta "Machine Learning" con gradiente verde a menta. -->
+                </h1>
+
+                <p>
+                <!-- <p>: Párrafo descriptivo debajo del título. Explica brevemente
+                     el servicio: clases online, todos los niveles, Python a ML. -->
+                    Clases particulares online para todos los niveles. Desde Python hasta
+                    modelos de Machine Learning. Te acompaño paso a paso en tu camino
+                    en el mundo de la tecnología.
+                </p>
+
+                <div class="hero-buttons">
+                <!-- .hero-buttons: Contenedor flex para los botones de acción. -->
+
+                    <a href="#contacto" class="btn btn-primary">
+                    <!-- Botón principal que lleva al formulario de contacto.
+                         .btn: Estilo base de botón (flex, padding, border-radius, etc.).
+                         .btn-primary: Variante con gradiente verde oscuro. -->
+                        <i class="fas fa-calendar-check"></i> Agendá tu clase
+                        <!-- Ícono de calendario + texto "Agendá tu clase". -->
+                    </a>
+
+                    <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares"
+                       target="_blank" class="btn btn-whatsapp">
+                    <!-- Botón de WhatsApp que abre el chat directo.
+                         .btn-whatsapp: Variante verde de WhatsApp (#25D366). -->
+                        <i class="fab fa-whatsapp"></i> Escribime
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual fade-in-right">
+            <!-- .hero-visual: Columna derecha del Hero. Contiene el bloque de código.
+                 .fade-in-right: Animación que desliza desde la derecha al aparecer. -->
+
+                <div class="hero-code-block">
+                <!-- .hero-code-block: Simula una ventana de editor de código.
+                     Tiene una leve rotación 3D (rotateY) que se endereza al hacer hover. -->
+
+                    <div class="code-header">
+                    <!-- .code-header: La "barra de título" de la ventana del editor.
+                         Tiene tres puntitos (como VS Code) y el nombre del archivo. -->
+                        <span class="code-dot red"></span>
+                        <!-- Punto rojo (simula botón de cerrar). -->
+                        <span class="code-dot yellow"></span>
+                        <!-- Punto amarillo (simula botón de minimizar). -->
+                        <span class="code-dot green"></span>
+                        <!-- Punto verde (simula botón de maximizar). -->
+                        <span>modelo.py</span>
+                        <!-- Nombre del archivo: modelo.py. -->
+                    </div>
+
+                    <div class="code-body">
+                    <!-- .code-body: El contenido del código Python con resaltado de sintaxis
+                         (syntax highlighting) usando clases como .keyword, .function, .string.
+                         Esto es HTML con estilos, NO un editor real. -->
+                        <span class="keyword">import</span> numpy <span class="keyword">as</span> np<br>
+                        <!-- "import" y "as" son keywords de Python, se ven color violeta. -->
+                        <span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> <span class="class-name">RandomForestClassifier</span><br>
+                        <!-- Import del clasificador RandomForest. "RandomForestClassifier" es class-name (amarillo). -->
+                        <span class="comment"># Cargar datos de entrenamiento</span><br>
+                        <!-- Comentario en Python, se ve gris itálico. -->
+                        X_train, y_train = <span class="function">cargar_datos</span>()<br><br>
+                        <!-- Función "cargar_datos" (azul) que retorna los datos de entrenamiento. -->
+                        <span class="comment"># Crear y entrenar el modelo</span><br>
+                        modelo = <span class="class-name">RandomForestClassifier</span>(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;n_estimators=<span class="number">100</span>,<br>
+                        <!-- n_estimators=100: Número de árboles. "100" es number (naranja). -->
+                        &nbsp;&nbsp;&nbsp;&nbsp;max_depth=<span class="number">10</span>,<br>
+                        <!-- max_depth=10: Profundidad máxima de cada árbol. -->
+                        &nbsp;&nbsp;&nbsp;&nbsp;random_state=<span class="number">42</span><br>
+                        <!-- random_state=42: Semilla aleatoria (el clásico 42). -->
+                        )<br>
+                        modelo.<span class="function">fit</span>(X_train, y_train)<br><br>
+                        <!-- .fit(): Entrena el modelo con los datos de entrenamiento. -->
+                        <span class="comment"># Predecir</span><br>
+                        predicciones = modelo.<span class="function">predict</span>(X_test)<br>
+                        <!-- .predict(): Hace predicciones sobre nuevos datos. -->
+                        <span class="function">print</span>(<span class="string">f"Precisión: {accuracy:.2%}"</span>)
+                        <!-- print() con f-string que muestra la precisión en porcentaje. -->
+                    </div>
+                </div>
+
+                <!-- Floating tech icons -->
+                <!-- Iconos flotantes decorativos (🐍🤖📊) que se mueven suavemente
+                     con la animación CSS "float". Son puramente estéticos. -->
+                <div class="floating-icon" style="top: 5%; right: -5%;">🐍</div>
+                <!-- Serpiente (Python) en la parte superior derecha. -->
+                <div class="floating-icon" style="bottom: 15%; left: -10%;">🤖</div>
+                <!-- Robot (Machine Learning) en la parte inferior izquierda. -->
+                <div class="floating-icon" style="top: 45%; right: -10%;">📊</div>
+                <!-- Gráfico (Data Science) en el medio derecho. -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================================================
+         SECCIÓN: ABOUT (Sobre Mí)
+         ----------------------------------------------------------------------------------
+         Sección que presenta al docente. Tiene una cuadrícula de 2 columnas:
+         - Izquierda: placeholder para foto
+         - Derecha: texto de presentación + estadísticas (alumnos, clases, calificación)
+         Fondo: verde muy claro (--bg-light) para diferenciarla visualmente.
+    ================================================================================== -->
+    <section class="section about" id="sobre-mi">
+    <!-- .section: Clase genérica que da padding vertical (100px) a todas las secciones.
+         .about: Fondo verde claro específico de esta sección.
+         id="sobre-mi": Ancla para el enlace "Sobre mí" del menú. -->
+
+        <div class="container">
+
+            <div class="section-header fade-in">
+            <!-- .section-header: Encabezado común a todas las secciones.
+                 Centrado, con un tag (etiquetita) arriba + título h2 + descripción. -->
+                <span class="section-tag">Sobre mí</span>
+                <!-- .section-tag: Pequeña etiqueta tipo píldora con el nombre de la sección. -->
+                <h2>Tu docente de programación & ML</h2>
+                <!-- <h2>: Subtítulo principal de la sección. -->
+                <p>Apasionado por la enseñanza y la tecnología, te ayudo a alcanzar tus metas
+                   en el mundo del desarrollo y la inteligencia artificial.</p>
+            </div>
+
+            <div class="about-grid">
+            <!-- .about-grid: Cuadrícula de 2 columnas (1fr 1fr) para imagen y texto. -->
+
+                <div class="about-image fade-in-left">
+                <!-- .about-image: Columna izquierda con la foto (placeholder por ahora). -->
+                    <div class="about-image-placeholder">
+                    <!-- .about-image-placeholder: Recuadro con borde punteado que simula
+                         dónde iría la foto. Tiene un emoji de profesor y texto indicativo. -->
+                        <div class="icon">👨‍🏫</div>
+                        <!-- Emoji grande de docente. -->
+                        <span>Tu foto aquí</span>
+                        <small style="font-size:0.8rem; opacity:0.7;">(reemplazá este placeholder)</small>
+                        <!-- <small>: Texto pequeño que indica que esto es un placeholder reemplazable. -->
+                    </div>
+                </div>
+
+                <div class="about-text fade-in-right">
+                <!-- .about-text: Columna derecha con la presentación escrita. -->
+                    <h3>Docente de Programación & Machine Learning</h3>
+                    <!-- Título dentro de la columna de texto. -->
+
+                    <p>
+                        Soy docente con experiencia en programación y machine learning, apasionado por
+                        compartir conocimiento y ver a mis alumnos crecer. Mis clases son <strong>100% online,
+                        personalizadas</strong> y adaptadas a tu ritmo de aprendizaje.
+                        <!-- <strong>: Texto en negrita, enfatiza "100% online, personalizadas". -->
+                    </p>
+                    <p>
+                        Trabajo con estudiantes de <strong>todos los niveles</strong>: desde personas que
+                        nunca programaron hasta profesionales que quieren especializarse en Machine Learning
+                        e Inteligencia Artificial.
+                    </p>
+                    <p>
+                        Mi objetivo no es solo que aprendas teoría, sino que <strong>construyas proyectos
+                        reales</strong> que puedas mostrar en tu portafolio.
+                    </p>
+
+                    <div class="about-stats">
+                    <!-- .about-stats: Cuadrícula de 3 tarjetas con estadísticas.
+                         Cada tarjeta tiene un número grande y una etiqueta debajo. -->
+
+                        <div class="stat-card">
+                        <!-- .stat-card: Tarjeta blanca con sombra que contiene una estadística.
+                             El número se anima con JavaScript (IntersectionObserver + counter). -->
+                            <span class="stat-number">50+</span>
+                            <!-- .stat-number: Número grande en verde oscuro (se anima desde 0). -->
+                            <span class="stat-label">Alumnos</span>
+                            <!-- .stat-label: Texto descriptivo debajo del número. -->
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Clases dictadas</span>
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-number">5.0</span>
+                            <span class="stat-label">Calificación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================================================
+         SECCIÓN: SERVICES (Servicios)
+         ----------------------------------------------------------------------------------
+         Muestra 6 servicios en tarjetas con íconos emoji.
+         Las tarjetas tienen un hover con barra de gradiente superior y elevación.
+         Fondo: blanco (por defecto, sin clase adicional).
+    ================================================================================== -->
+    <section class="section" id="servicios">
+    <!-- .section Padding vertical estándar. Sin clase de fondo extra = fondo blanco.
+         id="servicios": Ancla para el enlace del menú. -->
+
+        <div class="container">
+
+            <div class="section-header fade-in">
+                <span class="section-tag">Servicios</span>
+                <h2>¿Qué podés aprender conmigo?</h2>
+                <p>Clases personalizadas diseñadas para tu nivel y objetivos específicos.</p>
+            </div>
+
+            <div class="services-grid">
+            <!-- .services-grid: Cuadrícula de 3 columnas (en desktop) con las tarjetas de servicio.
+                 En responsive: 2 columnas (tablet) -> 1 columna (móvil). -->
+
+                <!-- Cada .service-card es una tarjeta con:
+                     - Ícono emoji en un círculo con fondo verde claro
+                     - Título h3 del servicio
+                     - Descripción en párrafo
+                     - Al hacer hover: se eleva 6px, muestra una barra gradiente arriba,
+                       y el ícono cambia a fondo gradiente oscuro -->
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🐍</div>
+                    <h3>Python desde Cero</h3>
+                    <p>
+                        Aprendé Python desde lo más básico hasta nivel avanzado.
+                        Sintaxis, estructuras de datos, POO, y buenas prácticas.
+                    </p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🤖</div>
+                    <h3>Machine Learning</h3>
+                    <p>
+                        Introducción al ML: regresión, clasificación, clustering,
+                        redes neuronales, y deployment de modelos.
+                    </p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">📊</div>
+                    <h3>Data Science</h3>
+                    <p>
+                        Pandas, NumPy, Matplotlib, y análisis de datos.
+                        Aprendé a extraer insights de datos reales.
+                    </p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🧠</div>
+                    <h3>Deep Learning</h3>
+                    <p>
+                        TensorFlow, PyTorch, redes convolucionales y
+                        transformers. Proyectos prácticos de visión y NLP.
+                    </p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">💼</div>
+                    <h3>Preparación Laboral</h3>
+                    <p>
+                        Preparación para entrevistas técnicas, armado de
+                        portafolio, y proyectos para tu CV.
+                    </p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎯</div>
+                    <h3>Clases a Medida</h3>
+                    <p>
+                        ¿Tenés un objetivo específico? Armemos un plan de
+                        estudio personalizado para vos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================================================
+         SECCIÓN: METHODOLOGY (Metodología)
+         ----------------------------------------------------------------------------------
+         Sección con fondo verde oscuro y texto blanco (contraste fuerte).
+         Muestra 4 pasos numerados en tarjetas con efecto glassmorphism (cristal).
+         Cada tarjeta tiene: círculo verde menta con número + título + descripción.
+    ================================================================================== -->
+    <section class="section methodology" id="metodologia">
+    <!-- .methodology: Fondo verde oscuro (--green-dark) con texto blanco.
+         Tiene un círculo decorativo radial semitransparente con ::before en CSS.
+         id="metodologia": Ancla del menú. -->
+
+        <div class="container">
+
+            <div class="section-header fade-in">
+                <span class="section-tag">Metodología</span>
+                <!-- .section-tag se estila diferente aquí: fondo translúcido blanco y texto menta. -->
+                <h2>¿Cómo trabajamos?</h2>
+                <p>Una metodología probada para que aprendas de forma efectiva y divertida.</p>
+            </div>
+
+            <div class="methodology-grid">
+            <!-- .methodology-grid: 4 columnas en desktop, 2 en tablet, 1 en móvil. -->
+
+                <!-- Cada .method-card tiene:
+                     - Fondo translúcido (rgba blanco 8%) con backdrop-filter blur (efecto cristal)
+                     - Borde sutil blanco semitransparente
+                     - Número en círculo verde menta
+                     - Título h3 y descripción p -->
+
+                <div class="method-card fade-in">
+                    <div class="method-number">1</div>
+                    <!-- Círculo con el número del paso (1 al 4). -->
+                    <h3>Diagnóstico Inicial</h3>
+                    <p>Evaluamos tu nivel actual y definimos tus objetivos para crear un plan personalizado.</p>
+                </div>
+
+                <div class="method-card fade-in">
+                    <div class="method-number">2</div>
+                    <h3>Clases Online en Vivo</h3>
+                    <p>Encuentros por Zoom/Meet con pantalla compartida y coding en tiempo real.</p>
+                </div>
+
+                <div class="method-card fade-in">
+                    <div class="method-number">3</div>
+                    <h3>Proyectos Reales</h3>
+                    <p>Aprendé haciendo. Cada concepto lo aplicamos en proyectos prácticos y útiles.</p>
+                </div>
+
+                <div class="method-card fade-in">
+                    <div class="method-number">4</div>
+                    <h3>Seguimiento Continuo</h3>
+                    <p>Soporte por WhatsApp entre clases, material extra y ejercicios personalizados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================================================
+         SECCIÓN: TESTIMONIALS (Testimonios)
+         ----------------------------------------------------------------------------------
+         Muestra reseñas de alumnos en tarjetas con estrellas.
+         Fondo verde claro (--bg-light). 2 tarjetas en desktop, 1 en móvil.
+         Cada tarjeta tiene: 5 estrellas doradas + cita (blockquote) + autor con avatar.
+    ================================================================================== -->
+    <section class="section testimonials" id="testimonios">
+    <!-- .testimonials: Fondo verde claro de la paleta. id="testimonios": Ancla (no usada en navbar pero disponible). -->
+
+        <div class="container">
+
+            <div class="section-header fade-in">
+                <span class="section-tag">Testimonios</span>
+                <h2>Lo que dicen mis alumnos</h2>
+                <p>Estos son algunos de los comentarios de estudiantes que ya pasaron por mis clases.</p>
+            </div>
+
+            <div class="testimonial-grid">
+            <!-- .testimonial-grid: 2 columnas en desktop, 1 en móvil. -->
+
+                <div class="testimonial-card fade-in">
+                <!-- Tarjeta de testimonio: blanca con sombra y borde sutil. -->
+
+                    <div class="testimonial-stars">
+                    <!-- 5 estrellas doradas de Font Awesome (color #f59e0b = ámbar). -->
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+
+                    <blockquote>
+                    <!-- <blockquote>: Etiqueta semántica para citas textuales. Se ve en itálica. -->
+                        "Excelente docente. Muy paciente y con una gran capacidad para explicar conceptos
+                        complejos de forma sencilla. Pasé de no saber nada de Python a construir mi propio
+                        modelo de ML en 3 meses."
+                    </blockquote>
+
+                    <div class="testimonial-author">
+                    <!-- .testimonial-author: Flex row con avatar (iniciales) + nombre y título. -->
+                        <div class="testimonial-avatar">MC</div>
+                        <!-- Avatar circular con gradiente menta y las iniciales "MC". -->
+                        <div>
+                            <strong>María C.</strong>
+                            <!-- Nombre del alumno en negrita. -->
+                            <span>Estudiante de Data Science</span>
+                            <!-- Título o curso que estaba tomando. -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>
+                        "Las clases son muy dinámicas y se adaptan completamente a mi ritmo.
+                        En pocas semanas ya estaba resolviendo ejercicios que antes me parecían
+                        imposibles. 100% recomendado."
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AG</div>
+                        <div>
+                            <strong>Andrés G.</strong>
+                            <span>Estudiante de Programación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================================================
+         SECCIÓN: CONTACT (Contacto)
+         ----------------------------------------------------------------------------------
+         La sección más funcional de la página. Tiene 2 columnas:
+         - Izquierda: Información de contacto (WhatsApp, Email, Modalidad) + botón CTA
+         - Derecha: Formulario con campos (nombre, email, nivel, área, mensaje)
+         Fondo: blanco. El formulario tiene fondo verde claro y sombra.
+    ================================================================================== -->
+    <section class="section contact" id="contacto">
+    <!-- .contact: Fondo blanco. id="contacto": Ancla del menú y del botón "Agendá tu clase". -->
+
+        <div class="container">
+
+            <div class="section-header fade-in">
+                <span class="section-tag">Contacto</span>
+                <h2>Empecemos hoy</h2>
+                <p>Dejame tus datos y te contacto para coordinar una primera clase gratuita.</p>
+                <!-- Menciona que la primera clase es gratuita (incentivo). -->
+            </div>
+
+            <div class="contact-content">
+            <!-- .contact-content: Cuadrícula de 2 columnas para info y formulario. -->
+
+                <div class="contact-info fade-in-left">
+                <!-- Columna izquierda: info de contacto. -->
+
+                    <h2>¿Listo para empezar?</h2>
+                    <p>
+                    Escribime por WhatsApp o completá el formulario y te respondo
+                    a la brevedad. La primera clase es <strong>gratuita</strong> para
+                    que veas mi método de enseñanza.
+                    <!-- Refuerzo de la primera clase gratis. -->
+                    </p>
+
+                    <div class="contact-details">
+                    <!-- Lista vertical de medios de contacto. -->
+
+                        <div class="contact-item">
+                        <!-- Cada .contact-item tiene un ícono circular + texto. -->
+                            <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+                            <!-- Ícono de WhatsApp en círculo verde claro. -->
+                            <div class="contact-item-text">
+                                <strong>WhatsApp</strong>
+                                <span>+54 9 11 2345-6789</span>
+                                <!-- Número placeholder. El usuario debe actualizarlo. -->
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                            <!-- Ícono de sobre (email). -->
+                            <div class="contact-item-text">
+                                <strong>Email</strong>
+                                <span>docente@programacion-ml.com</span>
+                                <!-- Email placeholder. -->
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-video"></i></div>
+                            <!-- Ícono de videocámara (modalidad online). -->
+                            <div class="contact-item-text">
+                                <strong>Modalidad</strong>
+                                <span>Online por Zoom / Google Meet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-cta-buttons">
+                    <!-- Botones de acción en la columna de info. -->
+                        <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares"
+                           target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Escribime ahora
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-in-right">
+                <!-- Columna derecha: formulario de contacto.
+                     Fondo verde claro con sombra y bordes redondeados (--radius-lg). -->
+
+                    <form id="contactForm">
+                    <!-- <form>: Formulario HTML. id="contactForm" se usa en script.js
+                         para manejar el envío con JavaScript (e.preventDefault()).
+                         Actualmente el envío es simulado (no conectado a backend). -->
+
+                        <div class="form-group">
+                        <!-- .form-group: Cada campo del formulario con su label + input. -->
+                            <label for="name">Nombre completo</label>
+                            <!-- <label for="name">: Etiqueta del campo. "for" se vincula al id del input. -->
+                            <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                            <!-- <input>: Campo de texto. type="text" = texto normal.
+                                 placeholder = texto de ayuda dentro del campo.
+                                 required = el campo es obligatorio. -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                            <!-- type="email": Valida que tenga formato de email (@ y dominio). -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="level">Nivel actual</label>
+                            <select id="level" name="level" required>
+                            <!-- <select>: Menú desplegable para seleccionar el nivel.
+                                 Cada <option> es una opción. -->
+                                <option value="">Seleccioná tu nivel</option>
+                                <!-- Primer option: placeholder informativo. value="" = sin valor. -->
+                                <option value="principiante">Principiante (nunca programé)</option>
+                                <option value="basico">Básico (conozco lo básico)</option>
+                                <option value="intermedio">Intermedio (ya programo)</option>
+                                <option value="avanzado">Avanzado (quiero especializarme en ML)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interest">¿Qué te gustaría aprender?</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Seleccioná un área</option>
+                                <option value="python">Python desde cero</option>
+                                <option value="ml">Machine Learning</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="deep-learning">Deep Learning</option>
+                                <option value="prep-laboral">Preparación laboral</option>
+                                <option value="otro">Otro (a medida)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mensaje (opcional)</label>
+                            <textarea id="message" name="message" placeholder="Contame un poco sobre vos y tus objetivos..."></textarea>
+                            <!-- <textarea>: Área de texto multilínea para el mensaje.
+                                 Sin "required" porque es opcional. -->
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                        <!-- <button type="submit">: Botón que envía el formulario.
+                             type="submit" = al hacer clic, dispara el evento "submit".
+                             .btn-submit: Estilo de botón verde oscuro, ancho completo. -->
+                            <i class="fas fa-paper-plane"></i> Enviar mensaje
+                            <!-- Ícono de avión de papel (enviar). -->
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================================================
+         BOTÓN FLOTANTE DE WHATSAPP
+         ----------------------------------------------------------------------------------
+         Elemento fijo en la esquina inferior derecha de la pantalla.
+         Siempre visible mientras se scrollea. Tiene:
+         - Tooltip (texto "¡Escribime ahora!") que aparece al hacer hover
+         - Botón circular verde con ícono de WhatsApp
+         - Badge rojo con "1" simulando notificación
+         Animación de pulso en el botón (whatsapp-pulse).
+    ================================================================================== -->
+    <div class="whatsapp-float">
+    <!-- .whatsapp-float: Posición fixed, esquina inferior derecha. Flex row. -->
+
+        <div class="whatsapp-tooltip">¡Escribime ahora!</div>
+        <!-- .whatsapp-tooltip: Burbuja blanca con texto que se desliza desde la derecha
+             al hacer hover sobre el contenedor .whatsapp-float.
+             Opacity 0 por defecto -> 1 en hover. -->
+
+        <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares"
+           target="_blank"
+           class="whatsapp-btn"
+           aria-label="Contactar por WhatsApp">
+        <!-- Mismo enlace de WhatsApp, abre en nueva pestaña.
+             aria-label: Accesibilidad para lectores de pantalla. -->
+            <i class="fab fa-whatsapp"></i>
+            <!-- Ícono grande de WhatsApp. -->
+            <span class="badge">1</span>
+            <!-- .badge: Pequeño círculo rojo con "1" en la esquina superior derecha
+                 del botón. Simula una notificación no leída. Tiene su propia animación
+                 de pulso (badge-pulse). -->
+        </a>
+    </div>
+
+    <!-- ==================================================================================
+         SECCIÓN: FOOTER (Pie de Página)
+         ----------------------------------------------------------------------------------
+         Fondo verde oscuro con texto blanco. Tiene 4 columnas:
+         - Marca (CodeMentor) con descripción
+         - Navegación (enlaces a las secciones)
+         - Servicios (enlaces rápidos)
+         - Contacto (WhatsApp, Email, Formulario)
+         Abajo: barra de copyright + íconos de redes sociales (placeholders).
+    ================================================================================== -->
+    <footer class="footer">
+    <!-- <footer>: Etiqueta semántica para el pie de página. .footer: fondo verde oscuro. -->
+
+        <div class="container">
+
+            <div class="footer-grid">
+            <!-- .footer-grid: 4 columnas (2fr 1fr 1fr 1fr) en desktop.
+                 En responsive se va reduciendo. -->
+
+                <div class="footer-brand">
+                <!-- Columna más ancha (2fr) con el logo y descripción de la marca. -->
+                    <h3>
+                        <span style="background: var(--mint); color: var(--green-dark); width: 36px; height: 36px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem;">&lt;/&gt;</span>
+                        <!-- Cuadradito verde menta con "</>" como ícono del logo en el footer. -->
+                        CodeMentor
+                    </h3>
+                    <p>
+                        Clases particulares de programación y machine learning.
+                        Online, personalizadas y para todos los niveles.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                <!-- .footer-col: Columnas secundarias con listas de enlaces. -->
+                    <h4>Navegación</h4>
+                    <!-- Título de la columna en color menta. -->
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-mi">Sobre mí</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#metodologia">Metodología</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Python</a></li>
+                        <li><a href="#servicios">Machine Learning</a></li>
+                        <li><a href="#servicios">Data Science</a></li>
+                        <li><a href="#servicios">Deep Learning</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="https://wa.me/5491123456789" target="_blank">WhatsApp</a></li>
+                        <li><a href="mailto:docente@programacion-ml.com">Email</a></li>
+                        <!-- href="mailto:..." abre el cliente de email predeterminado. -->
+                        <li><a href="#contacto">Formulario</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+            <!-- .footer-bottom: Barra inferior con copyright y redes sociales.
+                 Separada del resto por un borde superior fino y translúcido. -->
+
+                <p>&copy; 2026 CodeMentor · Clases de Programación & Machine Learning</p>
+                <!-- &copy;: Símbolo de copyright (©). -->
+
+                <div class="footer-socials">
+                <!-- Íconos de redes sociales (placeholders, apuntan a "#").
+                     Cada uno es un círculo con el ícono de la red. -->
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================================================================================
+         SECCIÓN: CHAT WIDGET (Widget de Chat con IA)
+         ----------------------------------------------------------------------------------
+         Widget de chat flotante con asistente IA. Se comunica con el backend
+         (BACKEND/server.js) para obtener respuestas en streaming de OpenAI.
+
+         Tiene dos partes:
+         1. Botón flotante (chat-toggle-btn) - siempre visible, abre/cierra el chat
+         2. Panel de chat (chat-panel) - se despliega hacia arriba al hacer clic
+
+         El panel contiene:
+         - Header: avatar del robot + "Asistente ML" + botón cerrar
+         - Messages: área de mensajes con scroll automático
+         - Input: textarea que crece automáticamente + botón enviar
+    ================================================================================== -->
+
+    <!-- Contenedor principal del widget de chat -->
+    <!-- El atributo data-api-url define dónde está el backend.
+         En desarrollo: http://localhost:3000
+         En producción: cambiá esta URL por la de tu servidor. -->
+    <div class="chat-widget" id="chatWidget" data-api-url="http://localhost:3000">
+
+        <!-- BOTÓN FLOTANTE: Ícono circular que abre/cierra el chat -->
+        <button class="chat-toggle-btn" id="chatToggleBtn" aria-label="Abrir chat asistente">
+            <!-- Primer ícono: burbuja de chat (visible cuando el chat está CERRADO) -->
+            <i class="fas fa-comment-dots" id="chatOpenIcon"></i>
+            <!-- Segundo ícono: X (visible cuando el chat está ABIERTO) -->
+            <i class="fas fa-times" id="chatCloseIcon" style="display: none;"></i>
+        </button>
+
+        <!-- PANEL DE CHAT: El cuadro de diálogo que se despliega hacia arriba -->
+        <div class="chat-panel" id="chatPanel">
+
+            <!-- HEADER: Barra superior con avatar, nombre y botón cerrar -->
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <!-- Avatar del asistente (círculo con ícono de robot) -->
+                    <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+                    <div>
+                        <strong>Asistente ML</strong>
+                        <!-- Estado "Online" con punto verde animado -->
+                        <span class="chat-status"><span class="chat-status-dot"></span> Online</span>
+                    </div>
+                </div>
+                <button class="chat-close-btn" id="chatCloseBtn" aria-label="Cerrar chat">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <!-- MESSAGES: Área de scroll donde aparecen los mensajes -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Mensaje inicial de bienvenida del asistente -->
+                <div class="chat-msg chat-msg-bot">
+                    <div class="chat-msg-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="chat-msg-content">
+                        ¡Hola! 👋 Soy el asistente virtual de CodeMentor.
+                        Preguntame cualquier cosa sobre las clases de programación
+                        o machine learning. ¡Estoy acá para ayudarte!
+                    </div>
+                </div>
+            </div>
+
+            <!-- INPUT: Área de escritura y botón de envío -->
+            <div class="chat-input-area">
+                <!-- textarea: Campo multilínea que se expande automáticamente -->
+                <textarea class="chat-input" id="chatInput" placeholder="Escribí tu pregunta..." rows="1"></textarea>
+                <!-- Botón de envío (avión de papel) -->
+                <button class="chat-send-btn" id="chatSendBtn" aria-label="Enviar mensaje">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
