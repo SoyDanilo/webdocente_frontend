@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases de Programación & Machine Learning</title>
+    <meta name="description" content="Clases particulares de programación y machine learning. Online, todos los niveles. Python, ML, y más.">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                Code<span style="color: var(--mint);">Mentor</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#metodologia">Metodología</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li>
+                    <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares" target="_blank" class="nav-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Disponible para clases online
+                </div>
+                <h1>
+                    Aprendé <span class="highlight">Programación</span> &<br>
+                    <span class="highlight-mint">Machine Learning</span>
+                </h1>
+                <p>
+                    Clases particulares online para todos los niveles. Desde Python hasta 
+                    modelos de Machine Learning. Te acompaño paso a paso en tu camino 
+                    en el mundo de la tecnología.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contacto" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i> Agendá tu clase
+                    </a>
+                    <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Escribime
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual fade-in-right">
+                <div class="hero-code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span>modelo.py</span>
+                    </div>
+                    <div class="code-body">
+                        <span class="keyword">import</span> numpy <span class="keyword">as</span> np<br>
+                        <span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> <span class="class-name">RandomForestClassifier</span><br>
+                        <span class="comment"># Cargar datos de entrenamiento</span><br>
+                        X_train, y_train = <span class="function">cargar_datos</span>()<br><br>
+                        <span class="comment"># Crear y entrenar el modelo</span><br>
+                        modelo = <span class="class-name">RandomForestClassifier</span>(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;n_estimators=<span class="number">100</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;max_depth=<span class="number">10</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;random_state=<span class="number">42</span><br>
+                        )<br>
+                        modelo.<span class="function">fit</span>(X_train, y_train)<br><br>
+                        <span class="comment"># Predecir</span><br>
+                        predicciones = modelo.<span class="function">predict</span>(X_test)<br>
+                        <span class="function">print</span>(<span class="string">f"Precisión: {accuracy:.2%}"</span>)
+                    </div>
+                </div>
+                <!-- Floating tech icons -->
+                <div class="floating-icon" style="top: 5%; right: -5%;">🐍</div>
+                <div class="floating-icon" style="bottom: 15%; left: -10%;">🤖</div>
+                <div class="floating-icon" style="top: 45%; right: -10%;">📊</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about" id="sobre-mi">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Sobre mí</span>
+                <h2>Tu docente de programación & ML</h2>
+                <p>Apasionado por la enseñanza y la tecnología, te ayudo a alcanzar tus metas en el mundo del desarrollo y la inteligencia artificial.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-image fade-in-left">
+                    <div class="about-image-placeholder">
+                        <div class="icon">👨‍🏫</div>
+                        <span>Tu foto aquí</span>
+                        <small style="font-size:0.8rem; opacity:0.7;">(reemplazá este placeholder)</small>
+                    </div>
+                </div>
+                <div class="about-text fade-in-right">
+                    <h3>Docente de Programación & Machine Learning</h3>
+                    <p>
+                        Soy docente con experiencia en programación y machine learning, apasionado por 
+                        compartir conocimiento y ver a mis alumnos crecer. Mis clases son <strong>100% online, 
+                        personalizadas</strong> y adaptadas a tu ritmo de aprendizaje.
+                    </p>
+                    <p>
+                        Trabajo con estudiantes de <strong>todos los niveles</strong>: desde personas que 
+                        nunca programaron hasta profesionales que quieren especializarse en Machine Learning 
+                        e Inteligencia Artificial.
+                    </p>
+                    <p>
+                        Mi objetivo no es solo que aprendas teoría, sino que <strong>construyas proyectos 
+                        reales</strong> que puedas mostrar en tu portafolio.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Alumnos</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Clases dictadas</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">5.0</span>
+                            <span class="stat-label">Calificación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section" id="servicios">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Servicios</span>
+                <h2>¿Qué podés aprender conmigo?</h2>
+                <p>Clases personalizadas diseñadas para tu nivel y objetivos específicos.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🐍</div>
+                    <h3>Python desde Cero</h3>
+                    <p>
+                        Aprendé Python desde lo más básico hasta nivel avanzado. 
+                        Sintaxis, estructuras de datos, POO, y buenas prácticas.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🤖</div>
+                    <h3>Machine Learning</h3>
+                    <p>
+                        Introducción al ML: regresión, clasificación, clustering, 
+                        redes neuronales, y deployment de modelos.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">📊</div>
+                    <h3>Data Science</h3>
+                    <p>
+                        Pandas, NumPy, Matplotlib, y análisis de datos. 
+                        Aprendé a extraer insights de datos reales.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🧠</div>
+                    <h3>Deep Learning</h3>
+                    <p>
+                        TensorFlow, PyTorch, redes convolucionales y 
+                        transformers. Proyectos prácticos de visión y NLP.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">💼</div>
+                    <h3>Preparación Laboral</h3>
+                    <p>
+                        Preparación para entrevistas técnicas, armado de 
+                        portafolio, y proyectos para tu CV.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎯</div>
+                    <h3>Clases a Medida</h3>
+                    <p>
+                        ¿Tenés un objetivo específico? Armemos un plan de 
+                        estudio personalizado para vos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== METHODOLOGY ===== -->
+    <section class="section methodology" id="metodologia">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Metodología</span>
+                <h2>¿Cómo trabajamos?</h2>
+                <p>Una metodología probada para que aprendas de forma efectiva y divertida.</p>
+            </div>
+            <div class="methodology-grid">
+                <div class="method-card fade-in">
+                    <div class="method-number">1</div>
+                    <h3>Diagnóstico Inicial</h3>
+                    <p>Evaluamos tu nivel actual y definimos tus objetivos para crear un plan personalizado.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-number">2</div>
+                    <h3>Clases Online en Vivo</h3>
+                    <p>Encuentros por Zoom/Meet con pantalla compartida y coding en tiempo real.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-number">3</div>
+                    <h3>Proyectos Reales</h3>
+                    <p>Aprendé haciendo. Cada concepto lo aplicamos en proyectos prácticos y útiles.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-number">4</div>
+                    <h3>Seguimiento Continuo</h3>
+                    <p>Soporte por WhatsApp entre clases, material extra y ejercicios personalizados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Testimonios</span>
+                <h2>Lo que dicen mis alumnos</h2>
+                <p>Estos son algunos de los comentarios de estudiantes que ya pasaron por mis clases.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>
+                        "Excelente docente. Muy paciente y con una gran capacidad para explicar conceptos 
+                        complejos de forma sencilla. Pasé de no saber nada de Python a construir mi propio 
+                        modelo de ML en 3 meses."
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MC</div>
+                        <div>
+                            <strong>María C.</strong>
+                            <span>Estudiante de Data Science</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>
+                        "Las clases son muy dinámicas y se adaptan completamente a mi ritmo. 
+                        En pocas semanas ya estaba resolviendo ejercicios que antes me parecían 
+                        imposibles. 100% recomendado."
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AG</div>
+                        <div>
+                            <strong>Andrés G.</strong>
+                            <span>Estudiante de Programación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section contact" id="contacto">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Contacto</span>
+                <h2>Empecemos hoy</h2>
+                <p>Dejame tus datos y te contacto para coordinar una primera clase gratuita.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in-left">
+                    <h2>¿Listo para empezar?</h2>
+                    <p>
+                    Escribime por WhatsApp o completá el formulario y te respondo 
+                    a la brevedad. La primera clase es <strong>gratuita</strong> para 
+                    que veas mi método de enseñanza.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div class="contact-item-text">
+                                <strong>WhatsApp</strong>
+                                <span>+54 9 11 2345-6789</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-item-text">
+                                <strong>Email</strong>
+                                <span>docente@programacion-ml.com</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-video"></i></div>
+                            <div class="contact-item-text">
+                                <strong>Modalidad</strong>
+                                <span>Online por Zoom / Google Meet</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-cta-buttons">
+                        <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Escribime ahora
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form fade-in-right">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="level">Nivel actual</label>
+                            <select id="level" name="level" required>
+                                <option value="">Seleccioná tu nivel</option>
+                                <option value="principiante">Principiante (nunca programé)</option>
+                                <option value="basico">Básico (conozco lo básico)</option>
+                                <option value="intermedio">Intermedio (ya programo)</option>
+                                <option value="avanzado">Avanzado (quiero especializarme en ML)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">¿Qué te gustaría aprender?</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Seleccioná un área</option>
+                                <option value="python">Python desde cero</option>
+                                <option value="ml">Machine Learning</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="deep-learning">Deep Learning</option>
+                                <option value="prep-laboral">Preparación laboral</option>
+                                <option value="otro">Otro (a medida)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje (opcional)</label>
+                            <textarea id="message" name="message" placeholder="Contame un poco sobre vos y tus objetivos..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Enviar mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+    <div class="whatsapp-float">
+        <div class="whatsapp-tooltip">¡Escribime ahora!</div>
+        <a href="https://wa.me/5491123456789?text=¡Hola!%20Quiero%20información%20sobre%20clases%20particulares" target="_blank" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="badge">1</span>
+        </a>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>
+                        <span style="background: var(--mint); color: var(--green-dark); width: 36px; height: 36px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem;">&lt;/&gt;</span>
+                        CodeMentor
+                    </h3>
+                    <p>
+                        Clases particulares de programación y machine learning. 
+                        Online, personalizadas y para todos los niveles.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-mi">Sobre mí</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#metodologia">Metodología</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Python</a></li>
+                        <li><a href="#servicios">Machine Learning</a></li>
+                        <li><a href="#servicios">Data Science</a></li>
+                        <li><a href="#servicios">Deep Learning</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="https://wa.me/5491123456789" target="_blank">WhatsApp</a></li>
+                        <li><a href="mailto:docente@programacion-ml.com">Email</a></li>
+                        <li><a href="#contacto">Formulario</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CodeMentor · Clases de Programación & Machine Learning</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
