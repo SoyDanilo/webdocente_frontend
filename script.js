@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // BLOQUE: SMOOTH SCROLL FOR ANCHOR LINKS (Scroll Suave para Anclas)
     // ----------------------------------------------------------------------------------
     // Selecciona todos los enlaces que empiezan con "#" (anclas internas).
-    -/ Previene el salto instantáneo y lo reemplaza con un scroll suave animado.
+    // - Previene el salto instantáneo y lo reemplaza con un scroll suave animado.
     // - Calcula la posición del destino restando 80px (offset para que no quede
     //   tapado por la navbar fija).
     // - Usa window.scrollTo() con behavior: 'smooth' para la animación.
