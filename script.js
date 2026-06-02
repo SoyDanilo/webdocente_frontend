@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const submitBtn = contactForm.querySelector('.btn-submit');
-            const originalText = submitBtn.textContent;
+            const originalHTML = submitBtn.innerHTML;
 
             // Get form data
             const formData = new FormData(contactForm);
@@ -95,18 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Simulate sending (you can replace this with actual form submission)
-            submitBtn.textContent = 'Enviando...';
+            submitBtn.innerHTML = '⏳ Enviando...';
             submitBtn.disabled = true;
 
             setTimeout(() => {
                 // Show success message
-                submitBtn.textContent = '✅ Mensaje enviado';
+                submitBtn.innerHTML = '✅ Mensaje enviado';
                 submitBtn.style.background = 'linear-gradient(135deg, #16a34a, #22c55e)';
 
                 // Reset form after 3 seconds
                 setTimeout(() => {
                     contactForm.reset();
-                    submitBtn.textContent = originalText;
+                    submitBtn.innerHTML = originalHTML;
                     submitBtn.style.background = '';
                     submitBtn.disabled = false;
                 }, 3000);
